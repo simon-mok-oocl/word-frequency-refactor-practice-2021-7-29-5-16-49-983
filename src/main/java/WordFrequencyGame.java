@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class WordFrequencyGame {
@@ -13,23 +10,8 @@ public class WordFrequencyGame {
             try {
 
                 //split the input string with 1 to n pieces of spaces
-                String[] words = inputStr.split(spaceRegex);
-
-                List<WordInfo> inputList = new ArrayList<>();
-                for (String s : words) {
-                    WordInfo wordInfo = new WordInfo(s, 1);
-                    inputList.add(wordInfo);
-                }
-
-                //get the map for the next step of sizing the same word
-                Map<String, List<WordInfo>> map =getListMap(inputList);
-
-                List<WordInfo> list = new ArrayList<>();
-                for (Map.Entry<String, List<WordInfo>> entry : map.entrySet()){
-                    WordInfo wordInfo = new WordInfo(entry.getKey(), entry.getValue().size());
-                    list.add(wordInfo);
-                }
-                inputList = list;
+                List<String> words = Arrays.asList(inputStr.split(spaceRegex));
+                List<WordInfo> inputList = calWordCount(words);
 
                 inputList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
@@ -47,24 +29,22 @@ public class WordFrequencyGame {
     }
 
 
-    private Map<String,List<WordInfo>> getListMap(List<WordInfo> inputList) {
-        Map<String, List<WordInfo>> map = new HashMap<>();
-        for (WordInfo wordInfo :  inputList){
-//       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!map.containsKey(wordInfo.getValue())){
-                ArrayList arr = new ArrayList<>();
-                arr.add(wordInfo);
-                map.put(wordInfo.getValue(), arr);
-            }
+    private List<WordInfo> calWordCount(List<String> sentence)
+    {
+        List<String> distinctWord = sentence.stream()
+                .distinct()
+                .collect(Collectors.toList());
 
-            else {
-                map.get(wordInfo.getValue()).add(wordInfo);
-            }
-        }
+        List<WordInfo> wordCount = new ArrayList<>();
+        
+        distinctWord.stream()
+                .forEach( targetWord ->
+                {
+                    int count = (int) sentence.stream().filter(word -> word.equals(targetWord)).count();
+                    wordCount.add(new WordInfo(targetWord , count));
+                });
 
-
-        return map;
+        return wordCount;
     }
-
 
 }
