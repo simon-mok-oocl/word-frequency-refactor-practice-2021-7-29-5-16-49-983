@@ -13,10 +13,6 @@ public class WordFrequencyGame {
 
         String spaceRegex = "\\s+";
 
-        if (inputStr.split(spaceRegex).length==1) {
-            return inputStr + " 1";
-        } else {
-
             try {
 
                 //split the input string with 1 to n pieces of spaces
@@ -51,7 +47,6 @@ public class WordFrequencyGame {
 
                 return "Calculate Error";
             }
-        }
     }
 
 
