@@ -11,13 +11,13 @@ public class WordFrequencyGame {
 
                 //split the input string with 1 to n pieces of spaces
                 List<String> words = Arrays.asList(inputStr.split(spaceRegex));
-                List<WordInfo> inputList = calWordCount(words);
+                List<WordInfo> wordCount = calWordCount(words);
 
-                inputList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+                wordCount.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
                 StringJoiner joiner = new StringJoiner("\n");
-                for (WordInfo w : inputList) {
-                    String s = w.getValue() + " " +w.getWordCount();
+                for (WordInfo word : wordCount) {
+                    String s = word.getValue() + " " +word.getWordCount();
                     joiner.add(s);
                 }
                 return joiner.toString();
