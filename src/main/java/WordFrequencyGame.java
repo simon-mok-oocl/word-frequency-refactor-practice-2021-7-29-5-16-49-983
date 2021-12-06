@@ -8,8 +8,6 @@ public class WordFrequencyGame {
         String spaceRegex = "\\s+";
 
             try {
-
-                //split the input string with 1 to n pieces of spaces
                 List<String> words = Arrays.asList(inputStr.split(spaceRegex));
                 List<WordInfo> wordCount = calWordCount(words);
 
