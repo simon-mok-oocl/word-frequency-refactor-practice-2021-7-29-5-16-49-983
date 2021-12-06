@@ -7,18 +7,20 @@ import java.io.CharArrayWriter;
 
 import java.time.LocalDateTime;
 
+
 public class WordFrequencyGame {
     public String getResult(String inputStr){
 
+        String spaceRegex = "\\s+";
 
-        if (inputStr.split("\\s+").length==1) {
+        if (inputStr.split(spaceRegex).length==1) {
             return inputStr + " 1";
         } else {
 
             try {
 
                 //split the input string with 1 to n pieces of spaces
-                String[] words = inputStr.split("\\s+");
+                String[] words = inputStr.split(spaceRegex);
 
                 List<Input> inputList = new ArrayList<>();
                 for (String s : words) {
