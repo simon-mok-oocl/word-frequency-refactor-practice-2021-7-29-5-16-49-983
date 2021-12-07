@@ -3,7 +3,7 @@ import java.util.stream.Collectors;
 
 
 public class WordFrequencyGame {
-    public String getResult(String inputStr){
+    public String getWordFrequency(String inputStr){
 
         String spaceRegex = "\\s+";
 
