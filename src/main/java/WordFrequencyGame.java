@@ -14,10 +14,9 @@ public class WordFrequencyGame {
                 wordCount.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
                 StringJoiner joiner = new StringJoiner("\n");
-                for (WordInfo word : wordCount) {
-                    String s = word.getValue() + " " +word.getWordCount();
-                    joiner.add(s);
-                }
+                wordCount.stream()
+                        .forEach(word -> joiner.add(String.format("%s %d" , word.getValue() , word.getWordCount())));
+
                 return joiner.toString();
             } catch (Exception e) {
 
